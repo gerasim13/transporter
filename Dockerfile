@@ -1,4 +1,4 @@
-FROM golang:1.4.2
+FROM kiasaki/alpine-golang
 MAINTAINER Pavel Litvinenko <gerasim13@gmail.com>
 
 RUN go-wrapper download github.com/compose/transporter/...
