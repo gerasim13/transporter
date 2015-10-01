@@ -2,11 +2,12 @@ package main
 
 import (
   "github.com/ant0ine/go-json-rest/rest"
+  "strings"
   "log"
   "fmt"
-  "net/http"
+  "os"
   "os/exec"
-  "strings"
+  "net/http"
 )
 
 func main() {
@@ -14,8 +15,11 @@ func main() {
   api.Use(rest.DefaultDevStack...)
   api.SetApp(rest.AppSimple(func(w rest.ResponseWriter, r *rest.Request) {
 
+    conf := os.Getenv("CONFIG")
+    app  := os.Getenv("APP")
+
     w.Header().Set("Content-Type", "text/plain")
-    cmd := exec.Command("transporter", "run", "--config", "/app/config.yaml", "/app/application.js")
+    cmd := exec.Command("transporter", "run", "--config", conf, app)
     outs, err := cmd.CombinedOutput()
 
     out_cmds := fmt.Sprintf("==> Executing: %s\n", strings.Join(cmd.Args, " "))

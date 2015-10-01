@@ -9,6 +9,9 @@ ADD ./rest.go /rest/main.go
 RUN go get github.com/ant0ine/go-json-rest/rest
 RUN go build -o main .
 
+ENV CONFIG '/app/config.yaml'
+ENV APP '/app/application.js'
+
 WORKDIR /app
 VOLUME ["/app"]
 
